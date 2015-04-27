@@ -1,0 +1,57 @@
+<!--a apple like desktop, to update it.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Apple Menu</title>
+	<style>
+		body{ margin: 0 }
+		.menu { text-align: center; position: absolute; bottom: 0px; width:100% }
+		img { cursor: pointer; }
+	</style>
+	<script>
+window.onload = function(){
+	var container = document.getElementById('menu');
+	var imgs = document.getElementsByTagName('img');
+	var imax = 150;		// 这个可以控制img的起伏幅度。
+	var left = container.offsetLeft;
+	var top = container.offsetTop;
+
+	document.onmousemove = function(e){
+		var x, y, c;
+		e = e || event;
+
+		for( var i = 0; i < imgs.length; i++ ){
+			x = imgs[i].offsetLeft + left - e.clientX + imgs[i].offsetWidth/2;
+			y = imgs[i].offsetTop + top - e.clientY + imgs[i].offsetHeight/2;
+
+			c = Math.sqrt( Math.pow(x, 2) + Math.pow(y, 2) );
+			 c = Math.min(c, imax);
+
+			 imgs[i].width = ((imax - c) / imax) * 64 + 64;
+		}
+}
+		var login = document.getElementById('login');
+		login.addEventListener('click', function(){
+				console.log('hello,  world');
+				}, true);
+}
+	</script>
+</head>
+<body>
+	<div id="menu" class="menu">
+		<img id='liebao' src="../images/liebao.jpg" alt="liebao" width="64">
+		<img id='moz' src="../images/moz.png" alt="64" width="64">
+		<img id='ie' src="../images/ie.png" alt="ie" width="64">
+		<img id='o' src="../images/o.png" alt="jj" width="64">
+		<img id='chrome' src="../images/chrome.png" alt="chrome" width="64">
+		<img id='autodesk' src="../images/autodesk.png" alt="autodesk" width="64">
+		<img id='vmware' src="../images/vmware.png" alt="vmware" width="64">
+		<img id='access' src="../images/access.png" alt="access" width="64">
+		<img id='itunes' src="../images/itunes.png" alt="itunes" width="64">
+		<img id='pdf' src="../images/pdf.png" alt="pdf" width="64">
+		<img id="vim" src="../images/vim.png" alt="vim" width='64'>
+		<img id='login' src="../images/login.png" alt="login" width="64">
+	</div>
+</body>
+</html>

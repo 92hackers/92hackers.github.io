@@ -7,6 +7,20 @@
 	<title>92Hackers Blog</title>
 </head>
 <body>
+	<div class="tooltips">
+		<span>所有文章</span>
+		<div class="arrow"></div>
+	</div>
+	<div style="top: 293px;" class="tooltips">
+		<span>Demos</span>
+		<div class="arrow"></div>
+	</div>
+	<div id="float-box">
+		<div id="inner-box">
+			<a href="./myposts.html"><img class="menu" src="images/pages.png" alt="pages"></a>
+			<a href="./demos.html"><img class="menu" src="images/demos.png" alt="demos"></a>
+		</div>
+	</div>
 	<div class="container">
 		<article>
 			<h1>VIM	入门</h1>
@@ -164,6 +178,6 @@
 			<img src="images/vi-vim-cheat-sheet.gif" alt="vim-sheet" title='没事就跟着来一遍？'>
 		</article>
 	</div>
-	<script src='js/jquery.min.js'></script>
+	<script src='js/require.js' defer async='true' data-main='js/main'></script>
 </body>
 </html>
