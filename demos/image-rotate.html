@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--This is a template file -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../css/site.css">
+	<title>微博图片旋转效果</title>
+	<style>
+#transparent-cover {
+	background: black;
+	opacity: 0.5;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 100;
+}
+#close {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	padding: 5px;
+	border: 1px solid black;
+	right: -44px;
+	top: -1px;
+	background-color: white;
+	z-index: 102;
+	border-radius: 3px;
+}
+#test {
+	background-color: white;
+	border: 1px solid black;
+	position: absolute;
+	left: 150px;
+	display: none;
+	width: 1000px;
+	height: 500px;
+	z-index: 101;
+	top: 50px;
+	padding: 30px;
+	padding-bottom: 50px;
+	border-radius: 5px;
+}
+#transparent-image {
+	width: 1000px;
+	height: 500px;
+}
+		#image {
+			width: 200px;
+			height: 200px;
+			cursor: url('../images/big.cur'), auto;
+		}
+		.image-closeup {
+			width: 200px;
+			height: 200px;
+		}
+		.image-container {
+			position: relative;
+			top: 0px;
+			left: 0px;
+			border: 1px solid #e1e4e5;
+			margin-left: 330px;
+			width: 200px;
+			height: 200px;
+			background-color: #fbfbfb;
+		}
+		#header-nav {
+			position: relative;
+			display: none;
+			height: 25px;
+			font-size: 13px;
+			color: #619cda;
+		}
+		#header-nav a:hover{
+			color: red;
+			text-decoration: underline;
+		}
+		#header-nav * {
+			float: left;
+			margin-left: 3px;
+		}
+	</style>
+	<script src="../js/require.js" defer="" async="true" data-main="../js/main"></script>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	<script>
+$(document).ready(function(){
+		var closeUp = $('#close-up');
+		var leftRotate = $('#left-rotate');
+		var rightRotate = $('#right-rotate');
+		var x = $('#transparent-cover');
+		var y = $('#transparent-image');
+
+		var scrollx = document.body.scrollWidth;
+		var scrolly = document.body.scrollHeight;
+
+		$('#close').hover( function(){
+				$(this).css('cursor', 'pointer');
+			}, 
+			function(){
+				$(this).css('cursor', 'pointer');
+			}
+			)
+		.click( function(){
+				$('#test').hide();
+				x.hide();
+			} )
+
+		x.width(scrollx);
+		x.height( scrolly );
+		$('#zoomIn').click( function(){
+			x.show();
+			$('#test').show();
+			} )
+		x.click( function(){
+				x.hide();
+				$('#test').hide();
+			} )
+		var rotateDeg = 0;
+		  function rotate(e){
+		  var temp;
+		  if ( e.data.direction == 'left' ){
+		  rotateDeg -= 90;
+		  } else {
+		  rotateDeg += 90;
+		  }
+		  $('#image').css('webkitTransform', 'rotate(' + rotateDeg + 'deg)');
+		  temp = (rotateDeg/90) % 2;
+		  if( temp == 1 || temp == -1 ){
+		  $('.image-container').css('width', 443 + 'px').css('height', 710 + 'px');
+		  $("#image").css('margin-top', 140 + 'px').css('margin-left', -135 + 'px');
+		  } else {
+		  $('.image-container').css('width', 710 + 'px').css('height', 443 + 'px');
+		  $('#image').css('margin-top', 0 + 'px').css('margin-left', 0 + 'px');
+		  }
+		  }
+		  function closed( e ){
+		  var temp = ( rotateDeg/90 ) % 2;
+		  $('#header-nav').hide();
+		  $('.image-container').css('padding', 0 + 'px');
+		  $('#image').css('width', 200 + 'px').css('height', 200 + 'px').css('cursor',"url('../images/big.cur'), auto");
+		  if( temp == 1 || temp == -1 ){
+		  $('#image').css('margin-top', 0 + 'px').css('margin-left', 0 + 'px');
+		  }
+		  $('.image-container').css('width', 200 + 'px').css('height', 200 + 'px');
+		  }
+		  function showUp( e ){
+		  var temp = ( rotateDeg/90 ) % 2;
+		  if( temp == 1 || temp == -1 ){
+		  $("#image").css('margin-top', 140 + 'px').css('margin-left', -135 + 'px');
+		  $('.image-container').css('width', 443 + 'px').css('height', 710 + 'px');
+		  } else {
+		  $('.image-container').css('width', 710 + 'px').css('height', 443 + 'px');
+		  }
+		  $('#image').css('width', 710 + 'px').css('height', 443 + 'px').css('cursor', 'default');
+		  $('#header-nav').show();
+		  $('.image-container').css('padding', 15 +'px' + ' ' + 20 + 'px' + ' ' + 35 + 'px' + ' ' + 20 + 'px');
+		  }
+		  $('#image').click( showUp );
+		  closeUp.click( closed );
+		  rightRotate.click( {direction: 'right'}, rotate );
+		  leftRotate.click( {direction: 'left'}, rotate );
+		  })
+		 
+	</script>
+</head>
+<body>
+
+<!--float box-->
+<div class="tooltips">
+	<span>所有文章</span>
+	<div class="arrow"></div>
+</div>
+<div style="top: 293px;" class="tooltips">
+	<span>Demos</span>
+	<div class="arrow"></div>
+</div>
+<div id="float-box">
+	<div id="inner-box"><a href="../myposts.html"><img class="menu" src="../images/pages.png" alt="pages"><a href="../demos.html"><img class="menu" src="../images/demos.png" alt="demos"></a></a></div>
+</div>
+<!--float box-->
+
+	<div class="image-container">
+		<div id="header-nav">
+			<img src="../images/close-up.png" alt="close up">
+			<a href='javascript:void(0)' id="close-up">收起</a>
+			<img src="../images/left-rotate.png" alt="left rotate">
+			<a href='javascript:void(0)' id="left-rotate">左转</a>
+			<img src="../images/right-rotate.png" alt="right rotate">
+			<a href='javascript:void(0)' id="right-rotate">右转</a>
+			<img src="../images/zoom-in.png" alt="zhe shi yige fang da jing">
+			<a href='javascript:void(0)' id="zoomIn">查看大图</a>
+		</div>
+		<img id="image" src="../images/zuoyou.jpeg" alt="rotate the image">
+	</div>
+	<div id="transparent-cover"></div>
+	<div id="test">
+		<img id="transparent-image" src="../images/zuoyou.jpeg" alt="rotate the image">
+		<div id="close"><img src="../images/close.png" alt="close the image"></div>
+	</div>
+</body>
+</html>
