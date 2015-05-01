@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	var temp = 0;	// a global variable records current left value of element #switch-content.
 	var countClick = 0;		// a global variable records current clicks of left-mouse.
 	var leftChicked = 0;		// to judge if left-arrow-bar has been clicked.
@@ -228,4 +228,40 @@ $(document).ready(function(){
 	for(var i = 0; i < texts.length; i++){
 		console.log( texts[i].text + '\t' + texts[i].author );
 	}
+})*/
+
+$(document).ready(function(){
+	var carousel = $('#switch-content'), 
+		currentPosition = parseInt( $('#switch-content').css('left') );
+	$('.demo1-content').hover( function(){
+		$('.left-arrow-bar').show();
+		$('.right-arrow-bar').show();
+	}, function(){
+		$('.left-arrow-bar').hide();
+		$('.right-arrow-bar').hide();
+	} );
+	function move( event){		// event.data.element
+		var	step = 0, 
+			temp = 0,
+			xelement = event.data.xelement,
+			runCount = 0;
+		if( event.data.direction == 'left' ){
+			step = event.data.speed;
+		} else {
+			step = -event.data.speed;
+		}
+		console.log( step);
+		var timeId = setInterval( function(){
+				runCount++;
+				step++;
+				temp = step + currentPosition;
+				$(xelement).css('left', temp + 'px');
+				if ( runCount == 89 ) { clearInterval( timeId ) }
+}, 1 );	
+		console.log( runCount );
+		currentPosition = temp;
+		console.log( currentPosition );
+}
+	$('.right-arrow-bar').click( {xelement: '#switch-content', speed: 8, direction: 'right'} , move );		// 再次强调，事件调用只用名字，不能加括号，传递参数用第一个eventObject就可以了。靠，真是猪头。
+	$('.left-arrow-bar').on('click', {xelement: '#switch-content', speed: 8, direction: 'left'}, move);
 })

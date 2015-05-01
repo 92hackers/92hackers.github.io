@@ -1,52 +1,141 @@
-<!--my demo1--!>
-<!--This is a beta version, i will update it when i get a better solution, Not long.--!>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>图片切换 Demo</title>
-	<link rel="icon" href="../images/favicon.ico">
-	<link rel="stylesheet" href="demo1.css">
-	<link rel="stylesheet" href="../css/site.css">
+	<meta charset="UTF-8"> <title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background-color: #f1f2f3;
+		}
+		#slider1_container {
+			position: relative;
+			top: 0px;
+			left: 0px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 100px;
+		}
+		#slide {
+			cursor: move;
+			position: absolute;
+			overflow: hidden;
+			left: 0px;
+			top: 0px;
+			width: 710px;
+			height: 443px;
+		}
+		.jssora01l, .jssora01r {
+			display: block;
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+		}
+		.jssora01l { left: 20px; background: url(../images/left.png)}
+		.jssora01r { right: 20px; background: url(../images/right.png)}
+
+
+
+		.jssorb01 {
+			position: absolute;
+			right: 40px;
+			bottom: 26px;
+		}
+
+		.jssorb01 div, .jssorb01 .av {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			cursor: pointer;
+			display: block;
+			border-radius: 6px;
+		}
+		.jssorb01 div { background-color: #b4b1af;  }
+		.jssorb01 .av { border-radius: 9px; background-color: #000000; margin-top: -2px;border: 2px solid #b3b1af; }
+		.caption {
+			position: absolute;
+			bottom: 30px;
+			left: 40px;
+			width: 615px;
+			height: 64px;
+			padding-left: 17px;
+			background-color: #000000;
+			opacity: 0.45;
+			border-radius: 5px;
+			color: #ffffff;
+			font-size: 15px;
+		}
+		#inner-text {
+			font-size: 28px;
+			float: left;
+			margin-top: 12px;
+		}
+		#inner-author {
+			float: left;
+			margin-left: 5px;
+			margin-top: 20px;
+		}
+	</style>
+	<script src="../js/jssor.slider.min.js"></script>
+	<script>
+jssor_slider1_starter = function( containerId ){
+	var options = {
+		$AutoPlay: false, 
+		$ArrowNavigatorOptions: {
+			$Class: $JssorArrowNavigator$, 
+			$ChanceToShow: 1, 
+			$AutoCenter: 2
+		}, 
+		$BulletNavigatorOptions:{
+			$changeToShow: 2, 
+			$Class: $JssorBulletNavigator$, 
+			$AutoCenter: 0, 
+			$Steps: 1, 
+			$SpacingX: 10, 
+			$SpacingY: 10, 
+			$Orientation: 1
+		}
+	};
+	var texts = [{content:'金牛座星座礼物', author: 'by 李大象在哪'}, {content: '两个人一起走下去', author: 'by 下一站xy'}, {content:'一屋一人一事', author:'by 柴灼'}, {content:'向左向右', author:'by 我来自台湾'}, {content:'堆糖周边发售了', author:'by 堆糖团队'}];
+	var jssor_slider1 = new $JssorSlider$(containerId, options);
+
+	function carouselContent( slideIndex, fromIndex ){
+		var Content = $Jssor$.$GetElement("inner-text");
+		var Author = $Jssor$.$GetElement("inner-author");
+		
+		// 我总是因为我自己打错字而浪费时间，怎么办？ 调试出现各种问题，怎么办，我好想哭。
+
+		$Jssor$.$InnerText( Content, texts[ slideIndex ].content );
+		$Jssor$.$InnerText( Author, texts[ slideIndex ].author );	
+
+	}
+
+	jssor_slider1.$On( $JssorSlider$.$EVT_PARK, carouselContent );
+};
+	</script>
 </head>
 <body>
-<div class="tooltips" style='z-index: 2;'>
-	<span>所有文章</span>
-	<div class="arrow"></div>
-</div>
-<div style="top: 293px; z-index: 2;" class="tooltips">
-	<span>Demos</span>
-	<div class="arrow"></div>
-</div>
-<div id="float-box" style='z-index: 2;'>
-	<div id="inner-box"><a href="../myposts.html"><img class="menu" src="../images/pages.png" alt="pages"><a href="../demos.html"><img class="menu" src="../images/demos.png" alt="demos"></a></a></div>
-</div>
-	<div class="left-wrap"></div>
-	<div class="right-wrap"></div>
-	<div class="demo1-content">
-	<div id="switch-content">
-		<div class="item"><a href="#"></a></div>
-		<div class="item"><a href="#"></a></div>
-		<div class="item"><a href="#"></a></div>
-		<div class="item"><a href="#"></a></div>
-		<div class="item"><a href="#"></a></div>
-	</div>
-	<div class="left-arrow-bar"><span></span></div>
-	<div class="right-arrow-bar"><span></span></div>
-	<div class="inner-content">
-		<span id="inner-text">一屋一人一事</span>
-		<span id="inner-author">by 柴灼</span>
-		<div class="points">
-			<span class="point"></span>
-			<span class="point"></span>
-			<span class="point"></span>
-			<span class="point"></span>
-			<span class="empty-point"></span>
+<!--The most outer wraper's stylesheet must be inline style.-->
+	<div style="width: 710px; height: 443px;" id="slider1_container">
+		<div id="slide" u="slides">
+			<div>
+				<a href="#" u="image"><img src="/home/cy/github_io/92hackers.github.io/images/book.jpeg" alt="che"></a>
+			</div>
+			<div><a href="#" u="image"><img src="/home/cy/github_io/92hackers.github.io/images/lianggeren.jpeg" alt="liebao" alt="che"></a></div>
+			<div><a href="#" u="image"><img src="/home/cy/github_io/92hackers.github.io/images/bowl.jpeg" alt="test"></a></div>
+			<div><a href="#" u="image"><img src="/home/cy/github_io/92hackers.github.io/images/zuoyou.jpeg" alt="test"></a></div>
+			<div><a href="#" u="image"><img src="/home/cy/github_io/92hackers.github.io/images/zhoubian.jpeg" alt="bowl"></a></div>
 		</div>
+		<div u="any" class="caption">
+			<span  id="inner-text">金牛座星座礼物</span>
+			<span  id="inner-author">by 李大象在哪</span>
+			<div class="jssorb01" u="navigator">
+				<div u="prototype"></div>
+			</div>
+		</div>
+		<span class="jssora01l" u="arrowleft"></span>
+		<span class="jssora01r" u="arrowright"></span>
+		<script> jssor_slider1_starter('slider1_container');</script>
 	</div>
-	</div>
-	<script src="../js/require.js" defer="" async="true" data-main="../js/main"></script>
-	<script src="../js/jquery.min.js"></script>
-	<script src="demo1.js"></script>
 </body>
 </html>
