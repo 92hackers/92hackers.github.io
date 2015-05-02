@@ -3,10 +3,8 @@
 <head>
 	<meta charset="UTF-8"> <title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/site.css">
 	<style>
-		body {
-			background-color: #f1f2f3;
-		}
 		#slider1_container {
 			position: relative;
 			top: 0px;
@@ -15,7 +13,7 @@
 			margin-right: auto;
 			margin-top: 100px;
 		}
-		#slide {
+		#slider1_container #slide {
 			cursor: move;
 			position: absolute;
 			overflow: hidden;
@@ -76,6 +74,7 @@
 			margin-top: 20px;
 		}
 	</style>
+	<script src="../js/require.js" defer async="true" data-main="../js/main"></script>
 	<script src="../js/jssor.slider.min.js"></script>
 	<script>
 jssor_slider1_starter = function( containerId ){
@@ -115,6 +114,20 @@ jssor_slider1_starter = function( containerId ){
 	</script>
 </head>
 <body>
+<div class="tooltips">
+	<span>所有文章</span>
+	<div class="arrow"></div>
+</div>
+<div style="top: 293px;" class="tooltips">
+	<span>Demos</span>
+	<div class="arrow"></div>
+</div>
+<div id="float-box">
+	<div id="inner-box">
+		<a href="../myposts.html"><img class="menu" src="../images/pages.png" alt="pages"></a>
+		<a href="../demos.html"><img class="menu" src="../images/demos.png" alt="demos"></a>
+	</div>
+</div>
 <!--The most outer wraper's stylesheet must be inline style.-->
 	<div style="width: 710px; height: 443px;" id="slider1_container">
 		<div id="slide" u="slides">

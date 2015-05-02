@@ -3,8 +3,8 @@
 require.config({
 	paths: {
 		'jquery': 'jquery.min',
-		'site': 'site'
+		'site': 'site' 
 	},
 });
 
-require(['jquery', 'site'],function (jquery, site){})
+require(['jquery', 'site',],function (jquery, site){})
