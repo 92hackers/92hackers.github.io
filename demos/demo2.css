@@ -24,6 +24,7 @@
 	width: 190px;
 	background: url('../images/tmall-tree-navigator-background.png') #181818 no-repeat;
 	color: #FFFFFF;
+	z-index: 10;
 }
 #tree-navigator h2 {
 	font-size: 13px;
@@ -67,11 +68,14 @@
 	width: 0px;
 	height: 0px;
 	border-style: solid;
-	border-width: 4px 4px 0px;
-	border-color: #fff transparent;
+	border-width: 4px 4px 0px 4px;
+	display: none;
+	/*border-color: #fff transparent;*/
+	border-color: #fff transparent transparent transparent;
 	position: absolute;
 	top: 14px;
 	right: 10px;
+	-webkit-transition: -webkit-transform 0.2s linear; 
 }
 #good-product-outer {
 	position: absolute;
@@ -95,9 +99,10 @@
 	position: absolute;
 	top: 83px;
 	border: 1px solid #f1f2f3;
-	left: 190px;
+	left: 180px;
 	background-color: #fbfbfb;
 	opacity: 0.95;
+	z-index: 5;
 }
 .sub-nav-content {
 	padding: 0px 20px;
@@ -139,7 +144,10 @@
 	background-repeat: no-repeat;
 	background-position: 28px 2px;
 }
-.sub-nav .red {
+#women .red {
+	color: #d01f47;
+}
+#women a:hover {
 	color: #d01f47;
 }
 .sub-nav .content .item {
@@ -222,3 +230,17 @@
 #kitchen { display: none; }
 #book .c { color: #0190b2; }
 #book a:hover { color: #0190b2; }
+#book { display: none; }
+/* 屎一样的代码。*/
+
+.main-navigator-li-selected { background-color: #a90000; }
+.main-navigator-li-out { background-color: #4a4a4a; }
+#good-product-outer { display: block; }
+.transform { -webkit-transform: rotate(-90deg); }
+
+
+/*#main-navigator li a {
+	float: left;
+	left: 47px;
+}*/
+
