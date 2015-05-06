@@ -69,7 +69,7 @@ define(['./jquery'], function( jquery ){
 				}
 			}, 
 			mouseleave: function( event ){
-				if ( event.clientX < 516 ){}else {
+				if ( event.clientX < 516 ){  }else {
 					var timeId = setTimeout(function(){
 						$('#good-product span').animate({
 							'margin-right': '-=5px'

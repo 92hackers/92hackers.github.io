@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--This is a template file -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../css/site.css">
+	<title>商品放大镜效果</title>
+	<style>
+img {
+	vertical-align: bottom;
+}
+.mod_zoom {
+	margin-top: 50px;
+	margin-left: 50px;
+	overflow: hidden;
+	zoom: 1;
+}
+.mod_zoom .p1 {
+	float: left;
+	position: relative;
+	height: 350px;
+	width: 350px;
+	margin-right: 5px;
+	cursor: crosshair;
+}
+#m {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 175px;
+	height: 175px;
+	background-color: #fede4f;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	display: none;
+}
+.mod_zoom .p2 {
+	position: relative;
+	width: 400px;
+	height: 400px;
+	overflow: hidden;
+	display: none;
+}
+.mod_zoom .p2 .img {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+	</style>
+</head>
+<body>
+<div class="tooltips">
+	<span>所有文章</span>
+	<div class="arrow"></div>
+</div>
+<div style="top: 293px;" class="tooltips">
+	<span>Demos</span>
+	<div class="arrow"></div>
+</div>
+<div id="float-box">
+	<div id="inner-box"><a href="../myposts.html"><img class="menu" src="../images/pages.png" alt="pages"><a href="../demos.html"><img class="menu" src="../images/demos.png" alt="demos"></a></a></div>
+</div>
+<!--page content begins !-->
+<div class="mod_zoom">
+	<div id="p1" class="p1">
+		<img src="http://img14.360buyimg.com/n1/4071/b350e77e-fc74-4173-81b5-dfe54f425ef6.jpg" id="z1" alt="xx"/>
+		<div id="m" class="mask"></div>
+	</div>
+	<div id="p2" class="p2">
+		<img src="http://img14.360buyimg.com/n0/4071/b350e77e-fc74-4173-81b5-dfe54f425ef6.jpg" class="img" alt="xxl" id="z2"/>
+	</div>
+</div>
+
+
+<!--page content stops !-->
+<script src="../js/require.js" defer async="true" data-main="../js/main"></script>
+<script>
+
+function PhotoZoomer( elements ){
+	this.mask = elements.mask;
+	this.container = elements.container;
+	this.originimg = elements.originimg;
+	this.bigContainer = elements.bigContainer;
+	this.bigimg = elements.bigimg;
+
+	this.visible = false;
+
+	this._bind();
+}
+
+PhotoZoomer.prototype = {
+display: function(style){
+			 var self = this;
+			 self.mask.style.display = style;
+			 self.bigContainer.style.display = style;
+		 }, 
+zoom: function( clientX, clientY ){
+		  var self = this
+			  rate = {}, 
+		  maxrange = {
+offsetLeft: self.container.offsetWidth - self.mask.offsetWidth, 
+			offsetTop: self.container.offsetHeight - self.mask.offsetHeight
+		  }, 
+		  tempLeft = clientX - self.container.offsetLeft - self.mask.offsetWidth / 2,		
+		  tempTop = clientY - self.container.offsetTop - self.mask.offsetHeight / 2;
+		  //总结： left,  top 这些都是保留字，不要用来做变量名，至少要加一些前缀什么的。
+		  if ( tempLeft < 0 ){
+			  tempLeft = 0;
+		  } else if ( tempLeft > maxrange.offsetLeft ){
+			  tempLeft = maxrange.offsetLeft;	//将mask 限定在container内部。	
+		  };
+		  if ( tempTop < 0 ){
+			  tempTop = 0;
+		  } else if ( tempTop > maxrange.offsetTop ){
+			  tempTop = maxrange.offsetTop;
+		  };
+
+		  rate.left = tempLeft / maxrange.offsetLeft;
+		  rate.top = tempTop / maxrange.offsetTop;
+		  //类似于当前动画的progress. 只不过是用光标的移动来替代了时间轴。
+
+		  self.mask.style.left = tempLeft + 'px';
+		  self.mask.style.top = tempTop + 'px';
+
+		  self.bigimg.style.left = -rate.left * ( self.bigimg.offsetWidth - self.bigContainer.offsetWidth ) + 'px';
+		  self.bigimg.style.top = -rate.top * ( self.bigimg.offsetHeight - self.bigContainer.offsetHeight ) + 'px';
+	  }, 
+_bind: function(){
+		   var self = this;
+		   self.container.onmouseover = function(e){
+			   e = e || window.event;
+			   var target = e.targe || e.srcElement;
+			   self.display('block');
+			   this.visible = true;
+		   };		// 控制 mask 是否出现。
+
+		   self.container.onmouseout = function(e){
+			   e = e || window.event;
+			   var target = e.targe || e.srcElement;
+			   self.display('none');
+			   this.visible = false;
+		   };
+		   self.container.onmousemove = function(e){
+			   e = e || window.event;
+			   if ( !this.visible )
+				   return;
+			   self.zoom(e.clientX, e.clientY);
+		   };		// 根据光标位置进行移动大图的left value.
+	   }
+}
+function get(id){
+	return document.getElementById(id)
+}
+var elements = {
+mask: get('m'), 
+	  container: get('p1'), 
+	  originimg: get('z1'), 
+	  bigContainer: get('p2'), 
+	  bigimg: get('z2')
+};
+var zoomer = new PhotoZoomer( elements );
+
+
+</script>
+
+</body>
+</html>
