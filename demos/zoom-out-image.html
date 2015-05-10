@@ -115,9 +115,9 @@ offsetLeft: self.container.offsetWidth - self.mask.offsetWidth,
 		  } else if ( tempTop > maxrange.offsetTop ){
 			  tempTop = maxrange.offsetTop;
 		  };
-
+			/*当前移动距离相对于总的距离的比例。*/
 		  rate.left = tempLeft / maxrange.offsetLeft;
-		  rate.top = tempTop / maxrange.offsetTop;
+		  rate.top = tempTop / maxrange.offsetTop;		 
 		  //类似于当前动画的progress. 只不过是用光标的移动来替代了时间轴。
 
 		  self.mask.style.left = tempLeft + 'px';
