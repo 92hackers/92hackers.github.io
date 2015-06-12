@@ -70,6 +70,9 @@ em { font-style: normal; }
 	width: 450px;
 	border: 2px solid #1e89e0;
 }
+#search:focus {
+	outline: none;
+}
 #submit {
 	display: inline-block;
 	width: 90px;
